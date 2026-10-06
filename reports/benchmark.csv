@@ -1,0 +1,10 @@
+query,format,median_sec
+Q1 group by status,CSV,0.8177
+Q1 group by status,Parquet,0.0132
+Q1 group by status,DuckDB table,0.0098
+Q2 monthly revenue,CSV,2.0694
+Q2 monthly revenue,Parquet,0.2494
+Q2 monthly revenue,DuckDB table,0.2332
+Q3 top products 2025,CSV,1.0342
+Q3 top products 2025,Parquet,0.0233
+Q3 top products 2025,DuckDB table,0.0146

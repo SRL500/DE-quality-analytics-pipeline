@@ -1,0 +1,84 @@
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+EXPLAIN ANALYZE SELECT product_id, SUM(revenue) AS r FROM read_parquet('C:/Users/Shree/Desktop/DE-quality-analytics-pipeline/data/bench/orders_big.parquet') WHERE order_date >= DATE '2025-01-01' GROUP BY 1 ORDER BY r DESC LIMIT 10
+┌────────────────────────────────────────────────┐
+│┌──────────────────────────────────────────────┐│
+││              Total Time: 0.0430s             ││
+│└──────────────────────────────────────────────┘│
+└────────────────────────────────────────────────┘
+┌───────────────────────────┐
+│           QUERY           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│      EXPLAIN_ANALYZE      │
+│    ────────────────────   │
+│                           │
+│           0 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│           TOP_N           │
+│    ────────────────────   │
+│          Top: 10          │
+│                           │
+│         Order By:         │
+│ sum(read_parquet.revenue) │
+│            DESC           │
+│                           │
+│                           │
+│                           │
+│          10 rows          │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│       HASH_GROUP_BY       │
+│    ────────────────────   │
+│         Groups: #0        │
+│    Aggregates: sum(#1)    │
+│                           │
+│                           │
+│                           │
+│          60 rows          │
+│           0.01s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         PROJECTION        │
+│    ────────────────────   │
+│         product_id        │
+│          revenue          │
+│                           │
+│                           │
+│                           │
+│        484,400 rows       │
+│           0.00s           │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         TABLE_SCAN        │
+│    ────────────────────   │
+│         Function:         │
+│        READ_PARQUET       │
+│                           │
+│        Projections:       │
+│         product_id        │
+│          revenue          │
+│                           │
+│          Filters:         │
+│ order_date>='2025-01-01': │
+│           :DATE           │
+│                           │
+│    Total Files Read: 1    │
+│                           │
+│        Filename(s):       │
+│ C:/Users/Shree/Desktop/DE │
+│     -quality-analytics    │
+│    -pipeline/data/bench   │
+│    /orders_big.parquet    │
+│                           │
+│                           │
+│                           │
+│        484,400 rows       │
+│           0.07s           │
+└───────────────────────────┘

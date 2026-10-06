@@ -1,0 +1,21 @@
+table,rule,dimension,description,total_rows,failed_rows,pass_rate_pct
+orders,order_id_missing,Completeness,order_id is NULL/blank,20400,5,99.98
+orders,order_id_duplicate,Uniqueness,order_id appears more than once (extra copies),20400,400,98.04
+orders,customer_id_missing,Completeness,customer_id is NULL/blank,20400,208,98.98
+orders,customer_unknown,Integrity,customer_id not found in customers,20400,60,99.71
+orders,product_unknown,Integrity,product_id not found in products,20400,103,99.5
+orders,quantity_invalid,Validity,quantity is not a positive integer,20400,154,99.25
+orders,unit_price_invalid,Validity,"unit_price is NULL, text or <= 0",20400,141,99.31
+orders,unit_price_outlier,Accuracy,unit_price > 5x the catalog price,20400,101,99.5
+orders,order_date_invalid,Validity,order_date is not a valid YYYY-MM-DD date,20400,103,99.5
+orders,order_date_future,Validity,order_date is in the future,20400,101,99.5
+orders,status_invalid,Validity,status not in the allowed list,20400,0,100.0
+orders,status_inconsistent,Consistency,status not trimmed/lower-case,20400,3056,85.02
+orders,payment_inconsistent,Consistency,payment_method not trimmed/lower-case,20400,1015,95.02
+customers,customer_id_duplicate,Uniqueness,customer_id appears more than once (extra copies),1015,15,98.52
+customers,email_missing,Completeness,email is NULL/blank,1015,40,96.06
+customers,email_invalid,Validity,email has an invalid format,1015,31,96.95
+customers,city_inconsistent,Consistency,city not in Title case / has extra spaces,1015,252,75.17
+customers,signup_date_invalid,Validity,signup_date is not a valid date,1015,0,100.0
+products,price_invalid,Validity,"price is NULL, text or <= 0",60,0,100.0
+products,category_missing,Completeness,category is NULL/blank,60,3,95.0

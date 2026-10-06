@@ -1,0 +1,7 @@
+category,orders,cancelled,returned,cancel_return_rate_pct
+Home & Kitchen,3742,345.0,309.0,17.5
+Books,3233,322.0,241.0,17.4
+Electronics,3946,369.0,309.0,17.2
+Beauty,3995,358.0,314.0,16.8
+Fashion,3389,275.0,266.0,16.0
+Uncategorized,980,92.0,60.0,15.5
